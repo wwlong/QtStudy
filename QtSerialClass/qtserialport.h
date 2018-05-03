@@ -18,16 +18,15 @@ class QtSerialPort //: public QObject
 {
     //Q_OBJECT
 public:
+    //QtSerialPort(SerialPortConfig serialPortConfig);
     QtSerialPort();
     ~QtSerialPort();
 public slots:
-    void initSerialPort();
+    void initSerialPort(SerialPortConfig serialPortConfig);
     void openSerialPort();
     void closeSerialPort();
     int writeData(const QString &data, uint32_t timeout_ms);
     int readData(QString &data, uint32_t timeout_ms);
-    void handleReadyRead();
-    void handleTimeout();
     void handleError(QSerialPort::SerialPortError error);
 
 private:
@@ -35,6 +34,7 @@ private:
     QByteArray  m_readData;
     QByteArray  m_writeData;
     QTimer      m_timer;
+    SerialPortConfig serialPortConfigInternal;
 };
 
 #endif // QTSERIALPORT_H
